@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\User;
 
 class DefaultsSeeder extends Seeder
 {
@@ -14,5 +15,7 @@ class DefaultsSeeder extends Seeder
         factory(App\User::class, 50)->create()->each(function ($user) {
             $user->posts()->save(factory(App\Post::class)->make());
         });
+
+        User::first()->update(['name' => 'Administrator', 'email' => 'admin@app.com']);
     }
 }
