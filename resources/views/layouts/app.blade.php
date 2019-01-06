@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @stack('css')
 </head>
 <body>
     <div id="app">
@@ -32,10 +33,24 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+                    @auth
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
                             <a href="/posts" class="nav-link">Posts</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="/users" class="nav-link">Users</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/roles" class="nav-link">Roles</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/permissions" class="nav-link">Permissions</a>
+                        </li>
+                    @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -78,5 +93,7 @@
             @yield('content')
         </main>
     </div>
+    <script src="/js/app.js"></script>
+    @stack('scripts')
 </body>
 </html>

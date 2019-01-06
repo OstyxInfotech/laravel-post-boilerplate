@@ -6,6 +6,10 @@ use App\Post;
 
 class PostsController extends Controller
 {
+    public function __construct()
+    {
+        // $this->authorizeResource(Post::class, 'post');
+    }
     public function index()
     {
         return view('posts.index')->withPosts(Post::latest()->paginate(15));
@@ -13,6 +17,7 @@ class PostsController extends Controller
 
     public function show(Post $post)
     {
+        // $this->authorize('view', $post);
         return view('posts.show')->withPost($post);
     }
 

@@ -18,6 +18,12 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        'App\Events\Auth\RolePermissionsChanged' => [
+            'App\Listeners\Auth\SyncUserPermissions'
+        ],
+        'App\Events\Auth\NewPermissionAdded' => [
+            'App\Listeners\Auth\SyncAllPermssionsToAdmins'
+        ]
     ];
 
     /**

@@ -6,10 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <span class="float-left">Posts ({{$posts->total()}})</span>
-                    <span class="float-right">
-                        <a href="posts/create" class="btn btn-primary btn-small">Add New Post</a>
-                    </span>
+                    <span class="float-left">Role Management ({{$roles->total()}})</span>
                 </div>
 
                 <div class="card-body">
@@ -23,23 +20,21 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Title</th>
-                                <th>Author</th>
+                                <th>Role</th>
+                                <th>Slug</th>
                                 <th></th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            @foreach ($posts as $post)
+                            @foreach ($roles as $role)
                                 <tr>
-                                    <td><a href="/posts/{{$post->id}}">{{$post->id}}</a></td>
-                                    <td>{{iconv_strlen($post->title)>40 ? substr($post->title, 0, 40).'...' : $post->title }}</td>
-                                    <td><a href="/authors/{{$post->owner->id}}">{{$post->owner->name}}</a></td>
+                                    <td>{{$role->id}}</td>
+                                    <td>{{$role->name }}</td>
+                                    <td>{{$role->slug}}</a></td>
                                     <td>
-                                        <a href="/posts/{{$post->id}}/edit" class="btn btn-warning btn-xs">
-                                            Edit
-                                        </a>
-                                        <form action="/posts/{{$post->id}}" method="POST" class="form-horizontal float-right">
+                                        <a class="btn btn-xs btn-warning" href="/roles/{{$role->id}}">Details</a>
+                                        <form action="/roles/{{$role->id}}" method="POST" class="form-horizontal float-right">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-xs">Delete</button>
@@ -52,7 +47,23 @@
                 </div>
 
                 <div class="card-footer">
-                    {{$posts->links()}}
+                    {{$roles->links()}}
+                </div>
+            </div>
+
+            <div class="card mt-5">
+                <div class="card-header">Add New Role</div>
+                <div class="card-body">
+                    <form action="/roles" method="POST" class="form" id="form-role">
+                        @csrf
+                        <div class="form-group">
+                            <label for="">Role</label>
+                            <input type="text" name="name" class="form-control" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary" onClick="document.getElementById('form-role').submit()">Create</button>
                 </div>
             </div>
         </div>

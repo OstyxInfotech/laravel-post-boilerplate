@@ -20,4 +20,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('/posts', 'PostsController');
     Route::get('/authors/{id}', 'AuthorsController@show');
+
+    Route::resource('/users', 'UsersController');
+    Route::resource('/roles', 'RolesController');
+    Route::resource('/permissions', 'PermissionsController');
 });

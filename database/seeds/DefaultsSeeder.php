@@ -12,10 +12,13 @@ class DefaultsSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\User::class, 50)->create()->each(function ($user) {
+        factory(App\User::class, 3)->create()->each(function ($user) {
+            $user->roles()->attach(2);
+            $user->syncPermissions();
             $user->posts()->save(factory(App\Post::class)->make());
         });
 
         User::first()->update(['name' => 'Administrator', 'email' => 'admin@app.com']);
+        User::first()->roles()->attach(1);
     }
 }

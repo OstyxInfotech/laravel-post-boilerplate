@@ -6,9 +6,9 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <span class="float-left">Posts ({{$posts->total()}})</span>
+                    <span class="float-left">User Management ({{$users->total()}})</span>
                     <span class="float-right">
-                        <a href="posts/create" class="btn btn-primary btn-small">Add New Post</a>
+                        <a href="posts/create" class="btn btn-primary btn-small">Add New User</a>
                     </span>
                 </div>
 
@@ -23,23 +23,21 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Title</th>
-                                <th>Author</th>
+                                <th>Name</th>
+                                <th>Email</th>
                                 <th></th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            @foreach ($posts as $post)
+                            @foreach ($users as $user)
                                 <tr>
-                                    <td><a href="/posts/{{$post->id}}">{{$post->id}}</a></td>
-                                    <td>{{iconv_strlen($post->title)>40 ? substr($post->title, 0, 40).'...' : $post->title }}</td>
-                                    <td><a href="/authors/{{$post->owner->id}}">{{$post->owner->name}}</a></td>
+                                    <td>{{$user->id}}</td>
+                                    <td>{{$user->name }}</td>
+                                    <td>{{$user->email}}</a></td>
                                     <td>
-                                        <a href="/posts/{{$post->id}}/edit" class="btn btn-warning btn-xs">
-                                            Edit
-                                        </a>
-                                        <form action="/posts/{{$post->id}}" method="POST" class="form-horizontal float-right">
+                                        <a class="btn btn-xs btn-warning" href="/users/{{$user->id}}">Details</a>
+                                        <form action="/users/{{$user->id}}" method="POST" class="form-horizontal float-right">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-xs">Delete</button>
@@ -52,7 +50,7 @@
                 </div>
 
                 <div class="card-footer">
-                    {{$posts->links()}}
+                    {{$users->links()}}
                 </div>
             </div>
         </div>
